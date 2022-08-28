@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: boilerplate-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespw
+      POSTGRES_DB: boilerplate
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    networks:
+      - boilerplate-network
+    restart: always
+  dev:
+    container_name: boilerplate-api-dev
+    image: boilerplate-api-dev:1.0.0
+    build:
+      context: .
+      target: development
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+      - "9229:9229"
+    networks:
+      - boilerplate-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: unless-stopped
+    depends_on:
+      - db
+
+networks:
+  boilerplate-network:
+
+volumes:
+  database-data:

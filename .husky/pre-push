@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo '🔬👨‍🔬 Testing your project before pushing'
+
+npm run test ||
+(
+    echo '❌👨‍🔬🧪❌ What the heck is going on here? ❌👨‍🔬🧪❌
+            Nest test failed: View the errors above to see why.
+    '
+    false;
+)
+
+# If everything passes... Now we can push
+echo '✅✅✅✅ You win this time... I am pushing this now. ✅✅✅✅'

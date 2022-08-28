@@ -1,0 +1,6 @@
+.tmp
+dist/
+.cache/
+coverage/
+.eslintrc.js
+.prettierrc

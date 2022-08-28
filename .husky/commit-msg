@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx commitlint --edit || 
+(
+    echo '❌🚽💩❌ Hehehehe... You should go to the toilet... Hehehehe ❌🚽💩❌
+            Commitlint Failed. You must enter valid commit message.
+    ';
+    false;
+) 
